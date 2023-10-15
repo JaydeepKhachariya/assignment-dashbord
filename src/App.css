@@ -1,0 +1,7 @@
+.pieChart {
+    height: 100% !important;
+}
+
+.dashbord::-webkit-scrollbar {
+    display: none;
+}
