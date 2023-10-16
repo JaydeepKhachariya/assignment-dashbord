@@ -5,3 +5,7 @@
 .dashbord::-webkit-scrollbar {
     display: none;
 }
+
+.css-1omuo8w-MuiToolbar-root {
+    display: none !important;
+}

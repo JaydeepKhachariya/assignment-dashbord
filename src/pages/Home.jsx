@@ -3,6 +3,7 @@ import { BiDollarCircle } from "react-icons/bi";
 import SummeryCard from "../components/layout/dashbord/SummeryCard";
 import ReactECharts from "echarts-for-react";
 import { FiSearch } from "react-icons/fi";
+import MaterialReactTable from "material-react-table";
 
 const Home = () => {
   const summeryData = [
@@ -105,8 +106,82 @@ const Home = () => {
     ],
   };
 
+  const tableData = [
+    {
+      id: 1,
+      name: "Abstract 3D",
+      subtital: "Lorem ipsum dolor sit amet.",
+      stock: "32 in stock",
+      price: "$45.99",
+      total: 20,
+    },
+    {
+      id: 2,
+      name: "Abstract 3D",
+      subtital: "Lorem ipsum dolor sit amet.",
+      stock: "32 in stock",
+      price: "$45.99",
+      total: 20,
+    },
+    {
+      id: 3,
+      name: "Abstract 3D",
+      subtital: "Lorem ipsum dolor sit amet.",
+      stock: "32 in stock",
+      price: "$45.99",
+      total: 20,
+    },
+    {
+      id: 4,
+      name: "Abstract 3D",
+      subtital: "Lorem ipsum dolor sit amet.",
+      stock: "32 in stock",
+      price: "$45.99",
+      total: 20,
+    },
+  ];
+
+  const columns = [
+    {
+      id: "product", //id used to define `group` column
+      header: "",
+      columns: [
+        {
+          accessorFn: (row) => `${row.title}`, //accessorFn used to join multiple data into a single cell
+          id: "profile_pic", //id is still required when using accessorFn instead of accessorKey
+          header: "Name",
+          size: 180,
+          Cell: ({ renderedCellValue, row }) => (
+            <td className="flex items-center gap-2">
+              <div className="h-[70px] w-[120px] bg-black rounded-md"></div>
+              <div className="flex flex-col">
+                <p className=" font-semibold">{row.original.name}</p>
+                <p className="text-gray-400 text-sm">{row.original.subtital}</p>
+              </div>
+            </td>
+          ),
+        },
+      ],
+    },
+    {
+      accessorKey: "stock",
+      header: "Stock",
+      enableEditing: false, // Enable or disable editing as needed
+    },
+    {
+      accessorKey: "price",
+      header: "Price",
+      enableEditing: false, // Enable or disable editing as needed
+    },
+    {
+      accessorKey: "total",
+      header: "Total",
+      enableEditing: false, // Enable or disable editing as needed
+    },
+  ];
+
   return (
-    <div className="flex flex-col items-start justify-start gap-7 overflow-y-auto dashbord">
+    <div className="flex flex-col items-start justify-start gap-7 overflow-y-auto dashbord p-4">
       <div className="w-full h-full grid grid-cols-2 gap-2 lg:grid-cols-4">
         {summeryData.map((el) => {
           return (
@@ -149,13 +224,13 @@ const Home = () => {
 
       <div className="w-full h-full">
         <div className="w-full overflow-x-auto sm:overflow-hidden bg-white rounded-lg p-4">
-          <div className="w-full flex items-center justify-between">
+          <div className="w-full flex sm:flex-row flex-col items-start  sm:items-center justify-between">
             <p className="text-xl font-semibold">Product Sell</p>
-            <div className="flex items-center justify-start gap-3">
-              <div className="bg-off-white min-w-[150px] w-auto p-2 h-3/5 flex items-center justify-start gap-2 rounded-md">
+            <div className="hidden items-center justify-start gap-3 sm:flex">
+              <div className="bg-off-white sm:min-w-[150px] sm:w-auto w-[130px] p-2 h-3/5 flex items-center justify-start gap-2 rounded-md">
                 <FiSearch className="text-xl" />
                 <input
-                  className="outline-none bg-transparent"
+                  className="outline-none bg-transparent placeholder:text-sm w-[130px] sm:w-full"
                   type="text"
                   placeholder="Search"
                 />
@@ -170,56 +245,17 @@ const Home = () => {
           </div>
 
           <div className="w-full">
-            <table className="w-full mt-5">
-              <tr className="pt-4 w-full">
-                <th className="text-left">Product name</th>
-                <th className="text-left">Stock</th>
-                <th className="text-left">Price</th>
-                <th className="text-left">Total sales</th>
-              </tr>
-              <tr className="pt-4">
-                <td className="flex items-center gap-2">
-                  <div className="h-[70px] w-[120px] bg-black rounded-md"></div>
-                  <div className="flex flex-col">
-                    <p className=" font-semibold">Abstract 3D</p>
-                    <p className="text-gray-400 text-sm">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-                  </div>
-                </td>
-                <td>32 in stock</td>
-                <td>$ 45.99</td>
-                <td>20</td>
-              </tr>
-              <tr className="pt-4">
-                <td className="flex items-center gap-2">
-                  <div className="h-[70px] w-[120px] bg-black rounded-md"></div>
-                  <div className="flex flex-col">
-                    <p className=" font-semibold">Abstract 3D</p>
-                    <p className="text-gray-400 text-sm">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-                  </div>
-                </td>
-                <td>32 in stock</td>
-                <td>$ 45.99</td>
-                <td>20</td>
-              </tr>
-              <tr className="pt-4">
-                <td className="flex items-center gap-2">
-                  <div className="h-[70px] w-[120px] bg-black rounded-md"></div>
-                  <div className="flex flex-col">
-                    <p className=" font-semibold">Abstract 3D</p>
-                    <p className="text-gray-400 text-sm">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-                  </div>
-                </td>
-                <td>32 in stock</td>
-                <td>$ 45.99</td>
-                <td>20</td>
-              </tr>
-            </table>
+            <MaterialReactTable
+              className="w-full mt-4"
+              columnFilterModeOptions={false}
+              enableRowActions={false}
+              enablePagination={false}
+              columns={columns}
+              data={tableData}
+              enableFilters={false}
+              enableDensityToggle={false}
+              enableFullScreenToggle={false}
+            />
           </div>
         </div>
       </div>
