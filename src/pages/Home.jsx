@@ -4,6 +4,10 @@ import SummeryCard from "../components/layout/dashbord/SummeryCard";
 import ReactECharts from "echarts-for-react";
 import { FiSearch } from "react-icons/fi";
 import MaterialReactTable from "material-react-table";
+import { BsArrowDownShort, BsArrowUpShort, BsHandbag } from "react-icons/bs";
+import { TbFileInvoice } from "react-icons/tb";
+import { MdAccountBalanceWallet } from "react-icons/md";
+import tableImage from "../assets/tableImage.jpg"
 
 const Home = () => {
   const summeryData = [
@@ -14,6 +18,8 @@ const Home = () => {
       price: "198",
       heading: "earning",
       icon: BiDollarCircle,
+      color: "#00cc53",
+      background: "#b8ffd5",
     },
     {
       id: 1,
@@ -21,7 +27,9 @@ const Home = () => {
       percentage: "2",
       price: "2.4",
       heading: "orders",
-      icon: BiDollarCircle,
+      icon: TbFileInvoice,
+      color: "#bb58ff",
+      background: "#e0b3ff",
     },
     {
       id: 1,
@@ -29,7 +37,9 @@ const Home = () => {
       percentage: "2",
       price: "2.4",
       heading: "balance",
-      icon: BiDollarCircle,
+      icon: MdAccountBalanceWallet,
+      color: "#1484ff",
+      background: "#bceaff",
     },
     {
       id: 1,
@@ -37,7 +47,9 @@ const Home = () => {
       percentage: "11",
       price: "89",
       heading: "total sales",
-      icon: BiDollarCircle,
+      icon: BsHandbag,
+      color: "#ff359b",
+      background: "#ffb8f2",
     },
   ];
 
@@ -114,6 +126,7 @@ const Home = () => {
       stock: "32 in stock",
       price: "$45.99",
       total: 20,
+      image : tableImage,
     },
     {
       id: 2,
@@ -122,6 +135,7 @@ const Home = () => {
       stock: "32 in stock",
       price: "$45.99",
       total: 20,
+      image : tableImage,
     },
     {
       id: 3,
@@ -130,6 +144,7 @@ const Home = () => {
       stock: "32 in stock",
       price: "$45.99",
       total: 20,
+      image : tableImage,
     },
     {
       id: 4,
@@ -138,6 +153,7 @@ const Home = () => {
       stock: "32 in stock",
       price: "$45.99",
       total: 20,
+      image : tableImage,
     },
   ];
 
@@ -152,8 +168,10 @@ const Home = () => {
           header: "Name",
           size: 180,
           Cell: ({ renderedCellValue, row }) => (
-            <td className="flex items-center gap-2">
-              <div className="h-[70px] w-[120px] bg-black rounded-md"></div>
+            <td className="flex items-center gap-5">
+              <div className="h-[50px] w-[80px] rounded-md overflow-hidden">
+                  <img src={row.original.image} className="w-full object-cover h-full"  />
+              </div>
               <div className="flex flex-col">
                 <p className=" font-semibold">{row.original.name}</p>
                 <p className="text-gray-400 text-sm">{row.original.subtital}</p>
@@ -185,13 +203,45 @@ const Home = () => {
       <div className="w-full h-full grid grid-cols-2 gap-2 lg:grid-cols-4">
         {summeryData.map((el) => {
           return (
-            <SummeryCard
-              heading={el.heading}
-              price={el.price}
-              status={el.status}
-              percentage={el.percentage}
+            <div
               key={el.id}
-            />
+              className="xs:h-[150px] h-[100px] w-auto bg-white flex items-center xs:justify-center justify-between rounded-lg gap-3 p-2"
+            >
+              <div
+                style={{ backgroundColor: `${el.background}` }}
+                className="xs:h-[100px] xs:w-[100px] w-[60px] h-[60px] rounded-full flex items-center justify-center"
+              >
+                {
+                  <el.icon
+                    style={{ color: `${el.color}` }}
+                    className="text-5xl"
+                  />
+                }
+              </div>
+              <div className="flex flex-col items-start justify-center">
+                <p className="text-gray-400 text-xs capitalize">{el.heading}</p>
+                <p className="xs:text-2xl text-lg font-semibold">
+                  ${el.price}k
+                </p>
+                <p className="xs:text-sm text-[10px] flex items-center justify-center gap-1">
+                  <span
+                    className={` ${
+                      el.status === "increse"
+                        ? "text-green-500"
+                        : "text-red-500"
+                    } flex items-center justify-center`}
+                  >
+                    {el.status === "increse" ? (
+                      <BsArrowUpShort />
+                    ) : (
+                      <BsArrowDownShort />
+                    )}{" "}
+                    {el.percentage}%{" "}
+                  </span>
+                  this month
+                </p>
+              </div>
+            </div>
           );
         })}
       </div>

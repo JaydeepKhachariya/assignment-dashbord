@@ -5,7 +5,7 @@ const SummeryCard = ({ heading, price, status, icon, percentage }) => {
   return (
     <div className="xs:h-[150px] h-[100px] w-auto bg-white flex items-center xs:justify-center justify-between rounded-lg gap-3 p-2">
       <div className="xs:h-[100px] xs:w-[100px] w-[60px] h-[60px] rounded-full flex items-center justify-center bg-black">
-        {<icon />}
+        <img src={icon} className="w-full" />
       </div>
       <div className="flex flex-col items-start justify-center">
         <p className="text-gray-400 text-xs capitalize">{heading}</p>

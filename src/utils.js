@@ -1,4 +1,5 @@
 import { TbUserSquareRounded } from "react-icons/tb";
+import { PiNutThin } from "react-icons/pi";
 
 export const sidebarItems = [
   {
@@ -10,7 +11,6 @@ export const sidebarItems = [
     id: 2,
     label: "Product",
     link: "/product",
-    image: TbUserSquareRounded,
   },
   {
     id: 3,
